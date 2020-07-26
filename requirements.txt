@@ -1,3 +1,2 @@
 rasa[convert]~=1.10.0  # when updating, check the sdk version in the Dockerfile as well!
--r actions/requirements-actions.txt
 pytablewriter

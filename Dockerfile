@@ -1,27 +1,15 @@
-# Pull SDK image as base image
-FROM rasa/rasa-sdk:1.10.0
+FROM python:3.6
 
-# Use subdirectory as working directory
-WORKDIR /app
+RUN useradd -m noobmaster
 
-# Copy actions requirements
-COPY actions/requirements-actions.txt ./
+ADD . /home/noobmaster
 
-# Change to root user to install dependencies
-USER root
+WORKDIR /home/noobmaster
 
-# Install extra requirements for actions code
-RUN pip install -r requirements-actions.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt && chown noobmaster.noobmaster /home/noobmaster -R
 
-# Copy actions code to working directory
-COPY ./actions /app/actions
+USER noobmaster
 
-# Install modules from setup.py
-COPY setup.py /app
-RUN  pip install -e . --no-cache-dir
+EXPOSE 5005
 
-# Don't use root user to run code
-USER 1001
-
-# Start the action server
-CMD ["start", "--actions", "actions.actions"]
+CMD ["rasa", "run", "--enable-api", "-m", "models/nlu_model.gz"]
