@@ -24,7 +24,7 @@ docker build -t rasa_nlu .
 docker run rasa_nlu
 ```
 
-This will build and start the a docker containing the NLU server on the default port (`5005`) of the Rasa NLU.
+This will build and start the a docker of the NLU server on the default port (`5005`) of the Rasa NLU.
 
 ### Without Docker
 1. [Optional] Create a python environment and activate it.
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ```
 rasa run --enable-api -m models/nlu_model.gz
 ```
-This will start the docker server on the default port `5005` of the container.
+This will start the Rasa NLU server on the default port `5005`.
 
 ## To test the API:
 
