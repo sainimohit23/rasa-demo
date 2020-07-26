@@ -21,7 +21,7 @@ docker build -t rasa_nlu .
 ```
 2. Start the NLU server using newly build docker container
 ```
-docker run rasa_nlu
+docker run -p 5005:5005 rasa_nlu
 ```
 
 This will build and start the a docker of the NLU server on the default port (`5005`) of the Rasa NLU.
@@ -42,10 +42,9 @@ This will start the Rasa NLU server on the default port `5005`.
 
 ## To test the API:
 
-After starting the server, test the api on the following endpoint `/model/parse`.
+After starting the server, test the api on the following endpoint `/model/parse`. Example-
 
 ```
-rasa test nlu -u test/test_data.json --model models
-rasa test core --stories test/test_stories.md
+curl localhost:5005/model/parse -d '{"text":"I am mohit saini"}'
 ```
 
